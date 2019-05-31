@@ -94,7 +94,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
             <View {...{ style }}>
                 {
                     // If show the preview if it exists
-                    hasPreview && (
+                    !isImageReady && (
                         <View
                             
                             resizeMode="cover"
@@ -110,11 +110,14 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                 {
                     // If the image is loaded, we show it on top
                     // this.onLoadEnd is used to start the deblurring animation
-                    (uri && uri !== preview) && (
+                    (uri) && (
                         <RNImage
                             source={{ uri }}
                             resizeMode="cover"
                             style={computedStyle}
+                            onLoad={() => {
+                                console.log('RN IMAGE ON LOAD!!!!!')
+                            }}
                             onLoadEnd={() => {
                                 console.log('RN on load end!!!!!')
                                 if (!this.props.hideChapterLoader) {
