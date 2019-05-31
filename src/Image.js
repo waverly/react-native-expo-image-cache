@@ -86,6 +86,10 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                 (result, value, key) => Object.assign(result, { [key]: (value - (style.borderWidth || 0)) })
             )
         ];
+
+        if (isImageReady) {
+
+        }
         return (
             <View {...{ style }}>
                 {
@@ -106,7 +110,14 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                             source={{ uri }}
                             resizeMode="cover"
                             style={computedStyle}
-                            onLoadEnd={this.onLoadEnd}
+                            onLoadEnd={() => {
+                                if (!this.props.hideChapterLoader) {
+                                    this.props.toggleChapterLoader();
+                                }
+                                this.onLoadEnd();
+                            }}
+
+
                         />
                     )
                 }
