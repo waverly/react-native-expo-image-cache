@@ -95,10 +95,15 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                 {
                     // If show the preview if it exists
                     hasPreview && (
-                        <RNImage
-                            source={{ uri: preview }}
+                        <View
+                            
                             resizeMode="cover"
-                            style={computedStyle}
+                            style={{
+                                // ...this.props.style,
+                                backgroundColor: 'pink',
+                                height: this.props.height,
+                                width: this.props.width
+                            }}
                         />
                     )
                 }
@@ -111,6 +116,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                             resizeMode="cover"
                             style={computedStyle}
                             onLoadEnd={() => {
+                                console.log('RN on load end!!!!!')
                                 if (!this.props.hideChapterLoader) {
                                     this.props.toggleChapterLoader();
                                 }
